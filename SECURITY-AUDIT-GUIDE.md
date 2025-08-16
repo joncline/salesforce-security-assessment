@@ -36,9 +36,18 @@ cd /home/joncline/Documents/ClineApps/salesforce-eval-migration
 node tests/real-org-security-test.js your-org-alias
 ```
 
-**Example:**
+**Examples:**
 ```bash
+# Assess a scratch org
+node tests/real-org-security-test.js my-scratch-org
+
+# Assess a sandbox org
+node tests/real-org-security-test.js mycompany-sandbox
+
+# Assess a development org
 node tests/real-org-security-test.js mycompany-dev
+
+# Assess a production org
 node tests/real-org-security-test.js production-org
 ```
 

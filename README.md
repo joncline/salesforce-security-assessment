@@ -62,9 +62,9 @@ The tool generates interactive radar charts showing your organization's security
 
 ## Usage
 
-### Real Org Security Assessment
+### Method 1: Quick Security Assessment (Recommended)
 
-Run a comprehensive security assessment on your actual Salesforce org:
+Run a direct security assessment on your Salesforce org:
 
 ```bash
 node tests/real-org-security-test.js your-org-alias
@@ -74,13 +74,55 @@ node tests/real-org-security-test.js your-org-alias
 1. Authenticate with Salesforce CLI: `sf org login web --alias your-org-alias`
 2. Ensure you have the required permissions (see Requirements section)
 
-**Example:**
+**Examples:**
 ```bash
+# Assess a scratch org
+node tests/real-org-security-test.js my-scratch-org
+
+# Assess a sandbox org
+node tests/real-org-security-test.js mycompany-sandbox
+
 # Assess a development org
 node tests/real-org-security-test.js mycompany-dev
 
 # Assess a production org  
 node tests/real-org-security-test.js production-org
+```
+
+### Method 2: Full Audit with Data Collection
+
+For comprehensive analysis with metadata collection:
+
+```bash
+# Make the script executable (first time only)
+chmod +x scripts/run-audit.sh
+
+# Run the full audit process
+./scripts/run-audit.sh
+```
+
+**This method will:**
+1. ✅ Check prerequisites
+2. 🔗 Verify Salesforce connection  
+3. 📁 Set up directory structure
+4. 📦 Retrieve metadata from your org
+5. 📊 Collect runtime data via queries
+6. 🔍 Execute security assessment
+7. 📄 Generate comprehensive reports
+
+**Script Options:**
+```bash
+# View all available options
+./scripts/run-audit.sh --help
+
+# Collect metadata only
+./scripts/run-audit.sh --metadata-only
+
+# Collect query data only  
+./scripts/run-audit.sh --queries-only
+
+# See what would be executed without running
+./scripts/run-audit.sh --dry-run
 ```
 
 ### Programmatic Usage
@@ -233,6 +275,11 @@ The tool uses Salesforce CLI commands to collect security-relevant data:
 This project is part of the Salesforce evaluation migration initiative and follows the same licensing terms as the original framework.
 
 ## Contributors
+
+- **Jon Cline** - Security Assessment Implementation and Migration Lead
+  - Website: [www.joncline.com](https://www.joncline.com)
+  - LinkedIn: [https://www.linkedin.com/in/joncline](https://www.linkedin.com/in/joncline)
+  - Led the transformation from Well-Architected Framework to focused Security Assessment tool
 
 - **Malo Lesegretain** - Original Well-Architected Framework concept and implementation
   - LinkedIn: [https://www.linkedin.com/in/malolesegretain/](https://www.linkedin.com/in/malolesegretain/)
