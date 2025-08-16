@@ -2,6 +2,31 @@
 
 A comprehensive security evaluation tool for Salesforce organizations, built with Cline and designed to assess security configurations across 7 critical categories.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Security Categories](#security-categories)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Method 1: Quick Security Assessment](#method-1-quick-security-assessment-recommended)
+  - [Method 2: Full Audit with Data Collection](#method-2-full-audit-with-data-collection)
+  - [Programmatic Usage](#programmatic-usage)
+  - [Running the Demo](#running-the-demo-mock-data)
+  - [Configuration](#configuration)
+- [Generated Reports](#generated-reports)
+- [Salesforce CLI Integration](#salesforce-cli-integration)
+- [Security Scoring](#security-scoring)
+- [Project Structure](#project-structure)
+- [Key Implementation Features](#key-implementation-features)
+- [Development](#development)
+- [Platform Compatibility](#platform-compatibility)
+- [Requirements](#requirements)
+- [License](#license)
+- [Contributors](#contributors)
+- [Contributing](#contributing)
+- [Support](#support)
+
 ## Overview
 
 This tool transforms the original Salesforce Well-Architected Framework audit into a focused **Salesforce Security Assessment** that evaluates your organization's security posture across key areas including profiles, permissions, data access, custom code, and monitoring.
