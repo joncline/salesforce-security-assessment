@@ -278,12 +278,90 @@ The tool uses Salesforce CLI commands to collect security-relevant data:
 - Update `generateHTMLReport()` for visual reports
 - Adjust `formatRecommendations()` and `formatActionPlan()` for custom formatting
 
+## Platform Compatibility
+
+This tool is **cross-platform compatible** and works on:
+- ✅ **Windows** (Windows 10/11, Windows Server)
+- ✅ **macOS** (macOS 10.15+)
+- ✅ **Linux** (Ubuntu, CentOS, RHEL, etc.)
+
+### Platform-Specific Notes
+
+#### Windows
+- **Method 1 (Quick Assessment)** works natively with Command Prompt or PowerShell
+- **Method 2 (Full Audit Script)** requires one of the following:
+  - **Git Bash** (recommended - comes with Git for Windows)
+  - **Windows Subsystem for Linux (WSL)**
+  - **PowerShell with bash support**
+
+#### macOS
+- All methods work natively with Terminal
+- Ensure Xcode Command Line Tools are installed: `xcode-select --install`
+
+#### Linux
+- All methods work natively
+- Most distributions include bash by default
+
+### Cross-Platform Usage Examples
+
+#### Method 1: Quick Assessment (All Platforms)
+```bash
+# Windows (Command Prompt/PowerShell)
+node tests/real-org-security-test.js your-org-alias
+
+# macOS/Linux (Terminal)
+node tests/real-org-security-test.js your-org-alias
+```
+
+#### Method 2: Full Audit Script
+
+**Windows:**
+```powershell
+# Using PowerShell (recommended for Windows)
+.\scripts\run-audit.ps1
+
+# Alternative: Using Git Bash
+chmod +x scripts/run-audit.sh
+./scripts/run-audit.sh
+```
+
+**macOS/Linux:**
+```bash
+chmod +x scripts/run-audit.sh
+./scripts/run-audit.sh
+```
+
 ## Requirements
 
-- Node.js (v14 or higher)
-- Salesforce CLI
+- **Node.js** (v14 or higher) - [Download](https://nodejs.org/)
+- **Salesforce CLI** - Install via: `npm install -g @salesforce/cli`
+- **Git** (Windows users need Git Bash for Method 2) - [Download](https://git-scm.com/)
 - Access to a Salesforce organization
 - Appropriate permissions to query security-related data
+
+### Platform-Specific Installation
+
+#### Windows
+1. Install Node.js from [nodejs.org](https://nodejs.org/)
+2. Install Git for Windows (includes Git Bash): [git-scm.com](https://git-scm.com/)
+3. Install Salesforce CLI: `npm install -g @salesforce/cli`
+4. Use Git Bash for running bash scripts, or Command Prompt/PowerShell for Node.js commands
+
+#### macOS
+1. Install Node.js: `brew install node` or download from [nodejs.org](https://nodejs.org/)
+2. Install Salesforce CLI: `npm install -g @salesforce/cli`
+3. Ensure Xcode Command Line Tools: `xcode-select --install`
+
+#### Linux
+1. Install Node.js via package manager or from [nodejs.org](https://nodejs.org/)
+   ```bash
+   # Ubuntu/Debian
+   sudo apt update && sudo apt install nodejs npm
+   
+   # CentOS/RHEL
+   sudo yum install nodejs npm
+   ```
+2. Install Salesforce CLI: `npm install -g @salesforce/cli`
 
 ## License
 
