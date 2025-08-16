@@ -82,13 +82,13 @@
     <div class="container">
         <div class="header">
             <h1>🔒 Salesforce Security Assessment Report</h1>
-            <div class="score-circle">8.80/10</div>
+            <div class="score-circle">7.30/10</div>
             <h2>Overall Security Score</h2>
         </div>
 
         <div class="metadata">
-            <strong>Generated:</strong> 2025-08-15T23:56:09.782Z<br>
-            <strong>Organization:</strong> demo-org<br>
+            <strong>Generated:</strong> 2025-08-16T00:23:43.262Z<br>
+            <strong>Organization:</strong> jon@devpod.co<br>
             <strong>Assessment Type:</strong> Comprehensive Security Evaluation
         </div>
 
@@ -106,19 +106,19 @@
             
                 <div class="category-card">
                     <h3>Object and Field Level Security (OLS & FLS)</h3>
-                    <div class="category-score">9.00/10</div>
+                    <div class="category-score">8.00/10</div>
                     <p>Weight: 15%</p>
                 </div>
             
                 <div class="category-card">
                     <h3>Sharing and Visibility Settings</h3>
-                    <div class="category-score">10.00/10</div>
+                    <div class="category-score">6.00/10</div>
                     <p>Weight: 15%</p>
                 </div>
             
                 <div class="category-card">
                     <h3>Custom Code and Metadata API</h3>
-                    <div class="category-score">10.00/10</div>
+                    <div class="category-score">9.00/10</div>
                     <p>Weight: 15%</p>
                 </div>
             
@@ -130,13 +130,13 @@
             
                 <div class="category-card">
                     <h3>Data Classification</h3>
-                    <div class="category-score">10.00/10</div>
+                    <div class="category-score">7.00/10</div>
                     <p>Weight: 15%</p>
                 </div>
             
                 <div class="category-card">
                     <h3>Audit Trails and Monitoring</h3>
-                    <div class="category-score">10.00/10</div>
+                    <div class="category-score">9.00/10</div>
                     <p>Weight: 15%</p>
                 </div>
             
@@ -149,31 +149,31 @@
                             <h4>Profiles and Permission Sets (Score: 3.00/10)</h4>
                             <p><strong>HIGH: Profiles and Permission Sets has significant security gaps. Score: 3/10</strong></p>
                             <ul>
-                                <li>🚨 SECURITY RISK: Found 1 profiles with ModifyAllData or ViewAllData permissions: System Administrator</li><li>📱 Found 2 Connected Apps in organization</li><li>🚨 CRITICAL RISK: 1 Connected Apps allow user self-authorization without admin approval:</li><li>  - Suspicious Data Extractor (Created: 2025-07-31T23:56:09.779Z, By: External User)</li><li>⚠️ WARNING: 1 Connected Apps lack session-level security policies</li><li>📅 1 Connected Apps created in last 30 days - review for legitimacy:</li><li>  - Suspicious Data Extractor (Created: 2025-07-31T23:56:09.779Z, By: External User)</li><li>🔑 Found 2 active OAuth tokens</li><li>⚠️ 1 OAuth tokens with high usage (>1000 uses) - monitor for data exfiltration:</li><li>  - Suspicious Data Extractor: 1500 uses by John Doe</li><li>📊 2 OAuth tokens used in last 7 days - verify legitimate business use</li><li>🛡️ SECURITY RECOMMENDATIONS:</li><li>  • Enable "Admin approved users are pre-authorized" for all Connected Apps</li><li>  • Review and audit all Connected App permissions and scopes</li><li>  • Monitor OAuth token usage patterns for anomalies</li><li>  • Implement token rotation policies</li>
+                                <li>🚨 SECURITY RISK: Found 3 profiles with ModifyAllData or ViewAllData permissions: System Administrator, Analytics Cloud Integration User, Sales Insights Integration User</li><li>✅ No Connected Apps found in organization.</li><li>🔑 Found 190 active OAuth tokens</li><li>⚠️ 3 OAuth tokens with high usage (>1000 uses) - monitor for data exfiltration:</li><li>  - Gearset Deploy: 1581 uses by Jon Cline</li><li>  - Gearset Deploy: 6781 uses by Jon Cline</li><li>  - Gearset Deploy: 3115 uses by Jon Cline</li><li>📊 10 OAuth tokens used in last 7 days - verify legitimate business use</li><li>🛡️ SECURITY RECOMMENDATIONS:</li><li>  • Monitor OAuth token usage patterns for anomalies</li><li>  • Implement token rotation policies</li>
+                            </ul>
+                        </div>
+                    <h3>⚡ Medium Priority</h3>
+                        <div class="category-card priority-medium">
+                            <h4>Sharing and Visibility Settings (Score: 6.00/10)</h4>
+                            <p><strong>MEDIUM: Sharing and Visibility Settings needs improvement. Score: 6/10</strong></p>
+                            <ul>
+                                <li>🔐 Found 3 Named Credentials</li><li>  - PerUser: 2 credentials</li><li>  - Anonymous: 1 credentials</li><li>⚠️ WARNING: 1 anonymous Named Credentials - review security implications</li><li>🔑 Found 5 Authentication Providers</li><li>  - Google: 1 providers</li><li>  - Salesforce: 2 providers</li><li>  - GitHub: 1 providers</li><li>  - Bitbucket: 1 providers</li><li>⚠️ No SAML SSO configurations found - consider implementing for enhanced security</li><li>🚨 CRITICAL: My Domain not configured - this is a significant security risk</li><li>🛡️ SECURITY RECOMMENDATIONS:</li><li>  • Configure My Domain immediately for enhanced security</li><li>  • My Domain prevents session hijacking and phishing attacks</li><li>  • Required for many advanced security features</li><li>  • Review anonymous Named Credentials for security implications</li><li>  • Consider using authenticated credentials where possible</li>
                             </ul>
                         </div>
                     <h3>✅ Low Priority</h3>
                         <div class="category-card priority-low">
-                            <h4>Object and Field Level Security (OLS & FLS) (Score: 9.00/10)</h4>
-                            <p><strong>LOW: Object and Field Level Security (OLS & FLS) is performing well but can be optimized. Score: 9/10</strong></p>
+                            <h4>Object and Field Level Security (OLS & FLS) (Score: 8.00/10)</h4>
+                            <p><strong>LOW: Object and Field Level Security (OLS & FLS) is performing well but can be optimized. Score: 8/10</strong></p>
                             <ul>
-                                <li>Found 1 overly permissive object permissions.</li>
+                                <li>⚠️ No field-level security data available - ensure FLS is properly configured</li><li>🔧 Found 14 profiles with metadata/setup access:</li><li>  - DP Team User: View Setup</li><li>  - Jr. BA: View Setup</li><li>  - Standard Platform User: View Setup</li><li>  - Platform - DP: View Setup</li><li>  - System Administrator: Modify Metadata, View Setup</li><li>  - Standard User: View Setup</li><li>  - Read Only: View Setup</li><li>  - Solution Manager: View Setup</li><li>  - Marketing User: View Setup</li><li>  - Contract Manager: View Setup</li><li>  - MMBnB - Admin: View Setup</li><li>  - Analytics Cloud Integration User: View Setup</li><li>  - Analytics Cloud Security User: View Setup</li><li>  - Sales Insights Integration User: View Setup</li><li>⚠️ WARNING: Consider limiting metadata access to essential admin profiles only</li><li>🛡️ SECURITY RECOMMENDATIONS:</li><li>  • Limit setup and metadata permissions to system administrators</li><li>  • Create separate admin profiles for different responsibilities</li>
                             </ul>
                         </div>
                     
                         <div class="category-card priority-low">
-                            <h4>Sharing and Visibility Settings (Score: 10.00/10)</h4>
-                            <p><strong>LOW: Sharing and Visibility Settings is performing well but can be optimized. Score: 10/10</strong></p>
+                            <h4>Custom Code and Metadata API (Score: 9.00/10)</h4>
+                            <p><strong>LOW: Custom Code and Metadata API is performing well but can be optimized. Score: 9/10</strong></p>
                             <ul>
-                                <li>Sharing and Visibility Settings evaluation placeholder.</li>
-                            </ul>
-                        </div>
-                    
-                        <div class="category-card priority-low">
-                            <h4>Custom Code and Metadata API (Score: 10.00/10)</h4>
-                            <p><strong>LOW: Custom Code and Metadata API is performing well but can be optimized. Score: 10/10</strong></p>
-                            <ul>
-                                <li>Custom Code and Metadata API evaluation placeholder.</li>
+                                <li>⚠️ No certificates found - may impact secure integrations</li><li>⚡ Apex classes metadata retrieved for security analysis</li><li>📋 Custom code security analysis requires metadata file parsing</li><li>📄 Visualforce pages metadata retrieved for security analysis</li><li>📋 Visualforce security analysis requires metadata file parsing</li><li>⚡ Lightning components metadata retrieved for security analysis</li><li>📋 Lightning component security analysis requires metadata file parsing</li><li>🔍 CUSTOM CODE SECURITY CONSIDERATIONS:</li><li>  • Implement static code analysis tools (PMD, SonarQube)</li><li>  • Regular security code reviews for custom development</li><li>  • Follow Salesforce secure coding guidelines</li><li>  • Use platform security features (sharing, FLS, CRUD)</li>
                             </ul>
                         </div>
                     
@@ -181,23 +181,23 @@
                             <h4>Public Access Settings (Score: 10.00/10)</h4>
                             <p><strong>LOW: Public Access Settings is performing well but can be optimized. Score: 10/10</strong></p>
                             <ul>
-                                <li>Public Access Settings evaluation placeholder.</li>
+                                <li>👥 Found 9 community/network members</li><li>  - Consultant Community: 5 members</li><li>  - Client Community: 4 members</li><li>🔒 Found 1 CSP trusted sites</li><li>  - 1 active trusted sites</li>
                             </ul>
                         </div>
                     
                         <div class="category-card priority-low">
-                            <h4>Data Classification (Score: 10.00/10)</h4>
-                            <p><strong>LOW: Data Classification is performing well but can be optimized. Score: 10/10</strong></p>
+                            <h4>Data Classification (Score: 7.00/10)</h4>
+                            <p><strong>LOW: Data Classification is performing well but can be optimized. Score: 7/10</strong></p>
                             <ul>
-                                <li>Data Classification evaluation placeholder.</li>
+                                <li>⚠️ Unable to retrieve custom metadata types - may impact data classification assessment</li><li>📧 Analyzing 63 recent email messages</li><li>🚨 MISSING: No comprehensive data classification framework detected</li><li>🛡️ SECURITY RECOMMENDATIONS:</li><li>  • Implement a comprehensive data classification framework</li><li>  • Create custom metadata types for data sensitivity levels</li><li>  • Establish data handling policies based on classification</li><li>  • Train users on data classification requirements</li>
                             </ul>
                         </div>
                     
                         <div class="category-card priority-low">
-                            <h4>Audit Trails and Monitoring (Score: 10.00/10)</h4>
-                            <p><strong>LOW: Audit Trails and Monitoring is performing well but can be optimized. Score: 10/10</strong></p>
+                            <h4>Audit Trails and Monitoring (Score: 9.00/10)</h4>
+                            <p><strong>LOW: Audit Trails and Monitoring is performing well but can be optimized. Score: 9/10</strong></p>
                             <ul>
-                                <li>Audit Trails and Monitoring evaluation placeholder.</li>
+                                <li>📊 Analyzing 2000 login records</li><li>🌐 Logins from 63 unique IP addresses</li><li>⚠️ WARNING: Logins from 63 different IP addresses - review for legitimacy</li><li>🌙 154 logins outside business hours (7.7%)</li><li>🔧 Analyzing 1000 setup changes</li><li>🛡️ SECURITY RECOMMENDATIONS:</li>
                             </ul>
                         </div>
                     
@@ -212,17 +212,17 @@
                             <p><strong>Timeline:</strong> 1-4 weeks</p>
                             <p><strong>Effort:</strong> Medium-High</p>
                         </div>
+                    <h3>🎯 Medium-term Actions (3-6 months)</h3>
+                        <div class="category-card priority-medium">
+                            <h4>Medium: Optimize Sharing and Visibility Settings security configuration</h4>
+                            <p><strong>Category:</strong> Sharing and Visibility Settings</p>
+                            <p><strong>Timeline:</strong> 1-3 months</p>
+                            <p><strong>Effort:</strong> Medium</p>
+                        </div>
                     <h3>🔮 Long-term Actions (6+ months)</h3>
                         <div class="category-card priority-low">
                             <h4>Low: Fine-tune Object and Field Level Security (OLS & FLS) for enhanced security</h4>
                             <p><strong>Category:</strong> Object and Field Level Security (OLS & FLS)</p>
-                            <p><strong>Timeline:</strong> 3-6 months</p>
-                            <p><strong>Effort:</strong> Low-Medium</p>
-                        </div>
-                    
-                        <div class="category-card priority-low">
-                            <h4>Low: Fine-tune Sharing and Visibility Settings for enhanced security</h4>
-                            <p><strong>Category:</strong> Sharing and Visibility Settings</p>
                             <p><strong>Timeline:</strong> 3-6 months</p>
                             <p><strong>Effort:</strong> Low-Medium</p>
                         </div>
@@ -271,7 +271,7 @@
                 labels: ["Profiles and Permission Sets","Object and Field Level Security (OLS & FLS)","Sharing and Visibility Settings","Custom Code and Metadata API","Public Access Settings","Data Classification","Audit Trails and Monitoring"],
                 datasets: [{
                     label: 'Security Scores',
-                    data: ["3.00","9.00","10.00","10.00","10.00","10.00","10.00"],
+                    data: ["3.00","8.00","6.00","9.00","10.00","7.00","9.00"],
                     backgroundColor: 'rgba(1, 118, 211, 0.2)',
                     borderColor: 'rgba(1, 118, 211, 1)',
                     borderWidth: 2,

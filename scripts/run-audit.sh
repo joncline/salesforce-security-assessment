@@ -97,21 +97,21 @@ retrieve_metadata() {
     
     # Security & Identity Metadata
     print_status "Retrieving security metadata..."
-    sf project retrieve start --metadata Profile,PermissionSet --target-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some security metadata may not be available"
+    sf project retrieve start --metadata Profile --metadata PermissionSet --target-metadata-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some security metadata may not be available"
     
     # Organization Configuration
     print_status "Retrieving organization configuration..."
-    sf project retrieve start --metadata CustomSetting,RemoteSiteSetting --target-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some org configuration may not be available"
+    sf project retrieve start --metadata CustomSetting --metadata RemoteSiteSetting --target-metadata-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some org configuration may not be available"
     
     # Application & Code Metadata
     print_status "Retrieving application metadata..."
-    sf project retrieve start --metadata ApexClass,ApexTrigger --target-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some application metadata may not be available"
-    sf project retrieve start --metadata LightningComponentBundle,AuraDefinitionBundle --target-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some Lightning metadata may not be available"
-    sf project retrieve start --metadata Flow --target-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some Flow metadata may not be available"
+    sf project retrieve start --metadata ApexClass --metadata ApexTrigger --target-metadata-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some application metadata may not be available"
+    sf project retrieve start --metadata LightningComponentBundle --metadata AuraDefinitionBundle --target-metadata-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some Lightning metadata may not be available"
+    sf project retrieve start --metadata Flow --target-metadata-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some Flow metadata may not be available"
     
     # Integration & API Metadata
     print_status "Retrieving integration metadata..."
-    sf project retrieve start --metadata ConnectedApp,NamedCredential --target-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some integration metadata may not be available"
+    sf project retrieve start --metadata ConnectedApp --metadata NamedCredential --target-metadata-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some integration metadata may not be available"
     
     print_success "Metadata retrieval completed"
 }
@@ -124,31 +124,39 @@ collect_runtime_data() {
     
     # Security Analysis Queries
     print_status "Collecting security data..."
-    sf data export --query "SELECT Id, Name, Profile.Name, IsActive, LastLoginDate FROM User WHERE IsActive = true LIMIT 1000" --result-format csv --target-dir "$AUDIT_DATA_DIR/queries" || print_warning "User data collection failed"
+    sf data query --query "SELECT Id, Name, Profile.Name, IsActive, LastLoginDate FROM User WHERE IsActive = true LIMIT 1000" --result-format csv > "$AUDIT_DATA_DIR/queries/users.csv" || print_warning "User data collection failed"
     
-    sf data export --query "SELECT AssigneeId, Assignee.Name, PermissionSet.Name, PermissionSet.Type FROM PermissionSetAssignment LIMIT 1000" --result-format csv --target-dir "$AUDIT_DATA_DIR/queries" || print_warning "Permission set assignment data collection failed"
+    sf data query --query "SELECT AssigneeId, Assignee.Name, PermissionSet.Name, PermissionSet.Type FROM PermissionSetAssignment LIMIT 1000" --result-format csv > "$AUDIT_DATA_DIR/queries/permission_set_assignments.csv" || print_warning "Permission set assignment data collection failed"
     
     # Performance & Monitoring Queries
     print_status "Collecting performance data..."
-    sf data export --query "SELECT Id, Action, Section, CreatedDate, CreatedBy.Name FROM SetupAuditTrail WHERE CreatedDate = LAST_N_DAYS:90 ORDER BY CreatedDate DESC LIMIT 1000" --result-format csv --target-dir "$AUDIT_DATA_DIR/queries" || print_warning "Setup audit trail collection failed"
+    sf data query --query "SELECT Id, Action, Section, CreatedDate, CreatedBy.Name FROM SetupAuditTrail WHERE CreatedDate = LAST_N_DAYS:90 ORDER BY CreatedDate DESC LIMIT 1000" --result-format csv > "$AUDIT_DATA_DIR/queries/setup_audit_trail.csv" || print_warning "Setup audit trail collection failed"
     
     # Architecture & Configuration Queries
     print_status "Collecting architecture data..."
-    sf data export --query "SELECT QualifiedApiName, Label, DeveloperName FROM EntityDefinition WHERE IsCustomizable = true LIMIT 1000" --result-format csv --target-dir "$AUDIT_DATA_DIR/queries" || print_warning "Entity definition collection failed"
+    sf data query --query "SELECT QualifiedApiName, Label, DeveloperName FROM EntityDefinition WHERE IsCustomizable = true LIMIT 1000" --result-format csv > "$AUDIT_DATA_DIR/queries/entity_definitions.csv" || print_warning "Entity definition collection failed"
     
     print_success "Runtime data collection completed"
 }
 
 # Function to execute audit
 execute_audit() {
-    print_status "Executing Salesforce Well-Architected Framework audit..."
+    print_status "Executing Salesforce Security Assessment..."
     
     cd "$PROJECT_DIR"
     
-    # Run the audit framework
-    node src/evaluation/cline-audit-framework.js
+    # Run the security assessment with the connected org
+    if [ -n "$ORG_USERNAME" ]; then
+        # Extract org alias from username or use username directly
+        ORG_ALIAS=$(sf org display --json | jq -r '.result.alias // .result.username')
+        print_status "Running security assessment for org: $ORG_ALIAS"
+        node tests/real-org-security-test.js "$ORG_ALIAS"
+    else
+        print_warning "No org connection found, running with default configuration"
+        node tests/real-org-security-test.js
+    fi
     
-    print_success "Audit execution completed"
+    print_success "Security assessment completed"
 }
 
 # Function to generate summary

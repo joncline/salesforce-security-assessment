@@ -9,19 +9,20 @@
       "effort": "Medium-High"
     }
   ],
-  "mediumTerm": [],
+  "mediumTerm": [
+    {
+      "priority": "Medium",
+      "category": "Sharing and Visibility Settings",
+      "action": "Optimize Sharing and Visibility Settings security configuration",
+      "timeline": "1-3 months",
+      "effort": "Medium"
+    }
+  ],
   "longTerm": [
     {
       "priority": "Low",
       "category": "Object and Field Level Security (OLS & FLS)",
       "action": "Fine-tune Object and Field Level Security (OLS & FLS) for enhanced security",
-      "timeline": "3-6 months",
-      "effort": "Low-Medium"
-    },
-    {
-      "priority": "Low",
-      "category": "Sharing and Visibility Settings",
-      "action": "Fine-tune Sharing and Visibility Settings for enhanced security",
       "timeline": "3-6 months",
       "effort": "Low-Medium"
     },

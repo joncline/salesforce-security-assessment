@@ -191,7 +191,7 @@ class SalesforceWellArchitectedAudit {
     async collectMetadata(metadataType) {
         console.log(`Retrieving ${metadataType} metadata...`);
         // Using sf project retrieve for specific metadata types
-        const command = `sf project retrieve start --metadata-dir temp_metadata --metadata ${metadataType} --target-org ${this.orgAlias} --json`;
+        const command = `sf project retrieve start --target-metadata-dir temp_metadata --metadata ${metadataType} --target-org ${this.orgAlias} --json`;
         try {
             const result = await this.executeSfCliCommand(command);
             // For retrieve, the actual metadata content needs to be read from the temp_metadata directory
@@ -266,14 +266,13 @@ class SalesforceWellArchitectedAudit {
      * These would contain the actual evaluation logic based on collected data
      */
     evaluateProfilesAndPermissionSets() {
-        // Check for profiles with ModifyAllData/ViewAllData
-        const profiles = this.orgData.queryData.profiles || [];
-        const highPrivilegeProfiles = profiles.filter(p => p.PermissionsModifyAllData || p.PermissionsViewAllData);
+        // Handle potential query errors by ensuring we have arrays
+        const profiles = Array.isArray(this.orgData.queryData.profiles) ? this.orgData.queryData.profiles : [];
+        const connectedAppsQuery = Array.isArray(this.orgData.queryData.connectedApps) ? this.orgData.queryData.connectedApps : [];
+        const oauthTokens = Array.isArray(this.orgData.queryData.oauthTokens) ? this.orgData.queryData.oauthTokens : [];
+        const connectedAppTokens = Array.isArray(this.orgData.queryData.connectedAppOAuthTokens) ? this.orgData.queryData.connectedAppOAuthTokens : [];
         
-        // Enhanced ConnectedApp security analysis to detect data theft risks
-        const connectedAppsQuery = this.orgData.queryData.connectedApps || [];
-        const oauthTokens = this.orgData.queryData.oauthTokens || [];
-        const connectedAppTokens = this.orgData.queryData.connectedAppOAuthTokens || [];
+        const highPrivilegeProfiles = profiles.filter(p => p.PermissionsModifyAllData || p.PermissionsViewAllData);
 
         let score = 10; // Start with a perfect score
         let details = [];
@@ -393,9 +392,10 @@ class SalesforceWellArchitectedAudit {
     }
 
     evaluateObjectAndFieldLevelSecurity() {
-        const objectPermissions = this.orgData.queryData.objectPermissions || [];
-        const fieldPermissions = this.orgData.queryData.fieldPermissions || [];
-        const profiles = this.orgData.queryData.profiles || [];
+        // Handle potential query errors by ensuring we have arrays
+        const objectPermissions = Array.isArray(this.orgData.queryData.objectPermissions) ? this.orgData.queryData.objectPermissions : [];
+        const fieldPermissions = Array.isArray(this.orgData.queryData.fieldPermissions) ? this.orgData.queryData.fieldPermissions : [];
+        const profiles = Array.isArray(this.orgData.queryData.profiles) ? this.orgData.queryData.profiles : [];
 
         let score = 10;
         let details = [];

@@ -1,70 +1,272 @@
 {
-  "overallScore": 8.8,
-  "timestamp": "2025-08-15T23:56:09.783Z",
-  "organization": "demo-org",
+  "overallScore": 7.299999999999999,
   "categoryScores": {
     "profilesAndPermissionSets": {
+      "name": "Profiles and Permission Sets",
       "score": 3,
+      "weight": 0.15,
       "details": [
-        "🚨 SECURITY RISK: Found 1 profiles with ModifyAllData or ViewAllData permissions: System Administrator",
-        "📱 Found 2 Connected Apps in organization",
-        "🚨 CRITICAL RISK: 1 Connected Apps allow user self-authorization without admin approval:",
-        "  - Suspicious Data Extractor (Created: 2025-07-31T23:56:09.779Z, By: External User)",
-        "⚠️ WARNING: 1 Connected Apps lack session-level security policies",
-        "📅 1 Connected Apps created in last 30 days - review for legitimacy:",
-        "  - Suspicious Data Extractor (Created: 2025-07-31T23:56:09.779Z, By: External User)",
-        "🔑 Found 2 active OAuth tokens",
-        "⚠️ 1 OAuth tokens with high usage (>1000 uses) - monitor for data exfiltration:",
-        "  - Suspicious Data Extractor: 1500 uses by John Doe",
-        "📊 2 OAuth tokens used in last 7 days - verify legitimate business use",
+        "🚨 SECURITY RISK: Found 3 profiles with ModifyAllData or ViewAllData permissions: System Administrator, Analytics Cloud Integration User, Sales Insights Integration User",
+        "✅ No Connected Apps found in organization.",
+        "🔑 Found 190 active OAuth tokens",
+        "⚠️ 3 OAuth tokens with high usage (>1000 uses) - monitor for data exfiltration:",
+        "  - Gearset Deploy: 1581 uses by Jon Cline",
+        "  - Gearset Deploy: 6781 uses by Jon Cline",
+        "  - Gearset Deploy: 3115 uses by Jon Cline",
+        "📊 10 OAuth tokens used in last 7 days - verify legitimate business use",
         "🛡️ SECURITY RECOMMENDATIONS:",
-        "  • Enable \"Admin approved users are pre-authorized\" for all Connected Apps",
-        "  • Review and audit all Connected App permissions and scopes",
         "  • Monitor OAuth token usage patterns for anomalies",
         "  • Implement token rotation policies"
       ]
     },
     "objectAndFieldLevelSecurity": {
-      "score": 9,
+      "name": "Object and Field Level Security (OLS & FLS)",
+      "score": 8,
+      "weight": 0.15,
       "details": [
-        "Found 1 overly permissive object permissions."
+        "⚠️ No field-level security data available - ensure FLS is properly configured",
+        "🔧 Found 14 profiles with metadata/setup access:",
+        "  - DP Team User: View Setup",
+        "  - Jr. BA: View Setup",
+        "  - Standard Platform User: View Setup",
+        "  - Platform - DP: View Setup",
+        "  - System Administrator: Modify Metadata, View Setup",
+        "  - Standard User: View Setup",
+        "  - Read Only: View Setup",
+        "  - Solution Manager: View Setup",
+        "  - Marketing User: View Setup",
+        "  - Contract Manager: View Setup",
+        "  - MMBnB - Admin: View Setup",
+        "  - Analytics Cloud Integration User: View Setup",
+        "  - Analytics Cloud Security User: View Setup",
+        "  - Sales Insights Integration User: View Setup",
+        "⚠️ WARNING: Consider limiting metadata access to essential admin profiles only",
+        "🛡️ SECURITY RECOMMENDATIONS:",
+        "  • Limit setup and metadata permissions to system administrators",
+        "  • Create separate admin profiles for different responsibilities"
       ]
     },
     "sharingAndVisibilitySettings": {
-      "score": 10,
+      "name": "Sharing and Visibility Settings",
+      "score": 6,
+      "weight": 0.15,
       "details": [
-        "Sharing and Visibility Settings evaluation placeholder."
+        "🔐 Found 3 Named Credentials",
+        "  - PerUser: 2 credentials",
+        "  - Anonymous: 1 credentials",
+        "⚠️ WARNING: 1 anonymous Named Credentials - review security implications",
+        "🔑 Found 5 Authentication Providers",
+        "  - Google: 1 providers",
+        "  - Salesforce: 2 providers",
+        "  - GitHub: 1 providers",
+        "  - Bitbucket: 1 providers",
+        "⚠️ No SAML SSO configurations found - consider implementing for enhanced security",
+        "🚨 CRITICAL: My Domain not configured - this is a significant security risk",
+        "🛡️ SECURITY RECOMMENDATIONS:",
+        "  • Configure My Domain immediately for enhanced security",
+        "  • My Domain prevents session hijacking and phishing attacks",
+        "  • Required for many advanced security features",
+        "  • Review anonymous Named Credentials for security implications",
+        "  • Consider using authenticated credentials where possible"
       ]
     },
     "customCodeAndMetadataAPI": {
-      "score": 10,
+      "name": "Custom Code and Metadata API",
+      "score": 9,
+      "weight": 0.15,
       "details": [
-        "Custom Code and Metadata API evaluation placeholder."
+        "⚠️ No certificates found - may impact secure integrations",
+        "⚡ Apex classes metadata retrieved for security analysis",
+        "📋 Custom code security analysis requires metadata file parsing",
+        "📄 Visualforce pages metadata retrieved for security analysis",
+        "📋 Visualforce security analysis requires metadata file parsing",
+        "⚡ Lightning components metadata retrieved for security analysis",
+        "📋 Lightning component security analysis requires metadata file parsing",
+        "🔍 CUSTOM CODE SECURITY CONSIDERATIONS:",
+        "  • Implement static code analysis tools (PMD, SonarQube)",
+        "  • Regular security code reviews for custom development",
+        "  • Follow Salesforce secure coding guidelines",
+        "  • Use platform security features (sharing, FLS, CRUD)"
       ]
     },
     "publicAccessSettings": {
+      "name": "Public Access Settings",
       "score": 10,
+      "weight": 0.1,
       "details": [
-        "Public Access Settings evaluation placeholder."
+        "👥 Found 9 community/network members",
+        "  - Consultant Community: 5 members",
+        "  - Client Community: 4 members",
+        "🔒 Found 1 CSP trusted sites",
+        "  - 1 active trusted sites"
       ]
     },
     "dataClassification": {
-      "score": 10,
+      "name": "Data Classification",
+      "score": 7,
+      "weight": 0.15,
       "details": [
-        "Data Classification evaluation placeholder."
+        "⚠️ Unable to retrieve custom metadata types - may impact data classification assessment",
+        "📧 Analyzing 63 recent email messages",
+        "🚨 MISSING: No comprehensive data classification framework detected",
+        "🛡️ SECURITY RECOMMENDATIONS:",
+        "  • Implement a comprehensive data classification framework",
+        "  • Create custom metadata types for data sensitivity levels",
+        "  • Establish data handling policies based on classification",
+        "  • Train users on data classification requirements"
       ]
     },
     "auditTrailsAndMonitoring": {
-      "score": 10,
+      "name": "Audit Trails and Monitoring",
+      "score": 9,
+      "weight": 0.15,
       "details": [
-        "Audit Trails and Monitoring evaluation placeholder."
+        "📊 Analyzing 2000 login records",
+        "🌐 Logins from 63 unique IP addresses",
+        "⚠️ WARNING: Logins from 63 different IP addresses - review for legitimacy",
+        "🌙 154 logins outside business hours (7.7%)",
+        "🔧 Analyzing 1000 setup changes",
+        "🛡️ SECURITY RECOMMENDATIONS:"
       ]
     }
   },
-  "recommendationCounts": {
-    "critical": 0,
-    "high": 1,
-    "medium": 0,
-    "low": 6
-  }
+  "recommendations": {
+    "critical": [],
+    "high": [
+      {
+        "category": "Profiles and Permission Sets",
+        "score": 3,
+        "details": [
+          "🚨 SECURITY RISK: Found 3 profiles with ModifyAllData or ViewAllData permissions: System Administrator, Analytics Cloud Integration User, Sales Insights Integration User",
+          "✅ No Connected Apps found in organization.",
+          "🔑 Found 190 active OAuth tokens",
+          "⚠️ 3 OAuth tokens with high usage (>1000 uses) - monitor for data exfiltration:",
+          "  - Gearset Deploy: 1581 uses by Jon Cline",
+          "  - Gearset Deploy: 6781 uses by Jon Cline",
+          "  - Gearset Deploy: 3115 uses by Jon Cline",
+          "📊 10 OAuth tokens used in last 7 days - verify legitimate business use",
+          "🛡️ SECURITY RECOMMENDATIONS:",
+          "  • Monitor OAuth token usage patterns for anomalies",
+          "  • Implement token rotation policies"
+        ],
+        "recommendation": "HIGH: Profiles and Permission Sets has significant security gaps. Score: 3/10"
+      }
+    ],
+    "medium": [
+      {
+        "category": "Sharing and Visibility Settings",
+        "score": 6,
+        "details": [
+          "🔐 Found 3 Named Credentials",
+          "  - PerUser: 2 credentials",
+          "  - Anonymous: 1 credentials",
+          "⚠️ WARNING: 1 anonymous Named Credentials - review security implications",
+          "🔑 Found 5 Authentication Providers",
+          "  - Google: 1 providers",
+          "  - Salesforce: 2 providers",
+          "  - GitHub: 1 providers",
+          "  - Bitbucket: 1 providers",
+          "⚠️ No SAML SSO configurations found - consider implementing for enhanced security",
+          "🚨 CRITICAL: My Domain not configured - this is a significant security risk",
+          "🛡️ SECURITY RECOMMENDATIONS:",
+          "  • Configure My Domain immediately for enhanced security",
+          "  • My Domain prevents session hijacking and phishing attacks",
+          "  • Required for many advanced security features",
+          "  • Review anonymous Named Credentials for security implications",
+          "  • Consider using authenticated credentials where possible"
+        ],
+        "recommendation": "MEDIUM: Sharing and Visibility Settings needs improvement. Score: 6/10"
+      }
+    ],
+    "low": [
+      {
+        "category": "Object and Field Level Security (OLS & FLS)",
+        "score": 8,
+        "details": [
+          "⚠️ No field-level security data available - ensure FLS is properly configured",
+          "🔧 Found 14 profiles with metadata/setup access:",
+          "  - DP Team User: View Setup",
+          "  - Jr. BA: View Setup",
+          "  - Standard Platform User: View Setup",
+          "  - Platform - DP: View Setup",
+          "  - System Administrator: Modify Metadata, View Setup",
+          "  - Standard User: View Setup",
+          "  - Read Only: View Setup",
+          "  - Solution Manager: View Setup",
+          "  - Marketing User: View Setup",
+          "  - Contract Manager: View Setup",
+          "  - MMBnB - Admin: View Setup",
+          "  - Analytics Cloud Integration User: View Setup",
+          "  - Analytics Cloud Security User: View Setup",
+          "  - Sales Insights Integration User: View Setup",
+          "⚠️ WARNING: Consider limiting metadata access to essential admin profiles only",
+          "🛡️ SECURITY RECOMMENDATIONS:",
+          "  • Limit setup and metadata permissions to system administrators",
+          "  • Create separate admin profiles for different responsibilities"
+        ],
+        "recommendation": "LOW: Object and Field Level Security (OLS & FLS) is performing well but can be optimized. Score: 8/10"
+      },
+      {
+        "category": "Custom Code and Metadata API",
+        "score": 9,
+        "details": [
+          "⚠️ No certificates found - may impact secure integrations",
+          "⚡ Apex classes metadata retrieved for security analysis",
+          "📋 Custom code security analysis requires metadata file parsing",
+          "📄 Visualforce pages metadata retrieved for security analysis",
+          "📋 Visualforce security analysis requires metadata file parsing",
+          "⚡ Lightning components metadata retrieved for security analysis",
+          "📋 Lightning component security analysis requires metadata file parsing",
+          "🔍 CUSTOM CODE SECURITY CONSIDERATIONS:",
+          "  • Implement static code analysis tools (PMD, SonarQube)",
+          "  • Regular security code reviews for custom development",
+          "  • Follow Salesforce secure coding guidelines",
+          "  • Use platform security features (sharing, FLS, CRUD)"
+        ],
+        "recommendation": "LOW: Custom Code and Metadata API is performing well but can be optimized. Score: 9/10"
+      },
+      {
+        "category": "Public Access Settings",
+        "score": 10,
+        "details": [
+          "👥 Found 9 community/network members",
+          "  - Consultant Community: 5 members",
+          "  - Client Community: 4 members",
+          "🔒 Found 1 CSP trusted sites",
+          "  - 1 active trusted sites"
+        ],
+        "recommendation": "LOW: Public Access Settings is performing well but can be optimized. Score: 10/10"
+      },
+      {
+        "category": "Data Classification",
+        "score": 7,
+        "details": [
+          "⚠️ Unable to retrieve custom metadata types - may impact data classification assessment",
+          "📧 Analyzing 63 recent email messages",
+          "🚨 MISSING: No comprehensive data classification framework detected",
+          "🛡️ SECURITY RECOMMENDATIONS:",
+          "  • Implement a comprehensive data classification framework",
+          "  • Create custom metadata types for data sensitivity levels",
+          "  • Establish data handling policies based on classification",
+          "  • Train users on data classification requirements"
+        ],
+        "recommendation": "LOW: Data Classification is performing well but can be optimized. Score: 7/10"
+      },
+      {
+        "category": "Audit Trails and Monitoring",
+        "score": 9,
+        "details": [
+          "📊 Analyzing 2000 login records",
+          "🌐 Logins from 63 unique IP addresses",
+          "⚠️ WARNING: Logins from 63 different IP addresses - review for legitimacy",
+          "🌙 154 logins outside business hours (7.7%)",
+          "🔧 Analyzing 1000 setup changes",
+          "🛡️ SECURITY RECOMMENDATIONS:"
+        ],
+        "recommendation": "LOW: Audit Trails and Monitoring is performing well but can be optimized. Score: 9/10"
+      }
+    ]
+  },
+  "timestamp": "2025-08-16T00:23:43.264Z",
+  "orgAlias": "jon@devpod.co"
 }
