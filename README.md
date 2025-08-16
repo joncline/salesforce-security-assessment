@@ -1,4 +1,4 @@
-r# Salesforce Security Assessment Tool
+# Salesforce Security Assessment Tool
 
 A comprehensive security evaluation tool for Salesforce organizations, built with Cline and designed to assess security configurations across 7 critical categories.
 
