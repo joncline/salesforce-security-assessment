@@ -15,13 +15,28 @@ This tool transforms the original Salesforce Well-Architected Framework audit in
 - **Action Plans**: Timeline-based security improvement roadmap
 - **Connected Apps Analysis**: Includes review of connected applications and their data access levels
 
-### Sample Security Assessment Visualization
+### Sample Security Assessment Output
 
-The tool generates interactive radar charts showing your organization's security posture across all categories:
+The tool generates comprehensive reports including visual radar charts in the HTML output showing your organization's security posture across all categories:
 
-![Security Category Scores](https://github.com/user-attachments/assets/sample-security-radar-chart.png)
+```
+Security Assessment Results:
+┌─────────────────────────────────────┬───────┬────────────┐
+│ Security Category                   │ Score │ Status     │
+├─────────────────────────────────────┼───────┼────────────┤
+│ Profiles and Permission Sets        │  7.2  │ Good       │
+│ Object and Field Level Security     │  6.8  │ Needs Work │
+│ Sharing and Visibility Settings     │  8.1  │ Excellent  │
+│ Custom Code and Metadata API        │  5.4  │ Needs Work │
+│ Public Access Settings              │  9.0  │ Excellent  │
+│ Data Classification                 │  6.2  │ Needs Work │
+│ Audit Trails and Monitoring         │  7.8  │ Good       │
+└─────────────────────────────────────┴───────┴────────────┘
 
-*Sample radar chart showing security scores across the 7 evaluation categories. The chart provides an immediate visual overview of your organization's security strengths and areas for improvement.*
+Overall Security Score: 7.2/10
+```
+
+*The HTML report includes interactive radar charts providing an immediate visual overview of your organization's security strengths and areas for improvement.*
 
 ## Security Categories
 
