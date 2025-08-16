@@ -101,7 +101,7 @@ retrieve_metadata() {
     
     # Organization Configuration
     print_status "Retrieving organization configuration..."
-    sf project retrieve start --metadata CustomSetting --metadata RemoteSiteSetting --target-metadata-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some org configuration may not be available"
+    sf project retrieve start --metadata RemoteSiteSetting --target-metadata-dir "$AUDIT_DATA_DIR/metadata" || print_warning "Some org configuration may not be available"
     
     # Application & Code Metadata
     print_status "Retrieving application metadata..."

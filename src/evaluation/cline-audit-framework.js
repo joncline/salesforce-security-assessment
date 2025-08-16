@@ -144,46 +144,42 @@ class SalesforceWellArchitectedAudit {
             queryData: {}
         };
 
-        // Collect security-relevant metadata
+        // Collect security-relevant metadata (only valid metadata types)
         this.orgData.metadata.profiles = await this.collectMetadata('Profile');
         this.orgData.metadata.permissionSets = await this.collectMetadata('PermissionSet');
         this.orgData.metadata.connectedApps = await this.collectMetadata('ConnectedApp');
-        this.orgData.metadata.securitySettings = await this.collectMetadata('SecuritySettings');
-        this.orgData.metadata.sharingRules = await this.collectMetadata('SharingRules');
-        this.orgData.metadata.networkAccess = await this.collectMetadata('NetworkAccess'); // Example, adjust as needed
         this.orgData.metadata.namedCredentials = await this.collectMetadata('NamedCredential');
-        this.orgData.metadata.customMetadataTypes = await this.collectMetadata('CustomMetadataType'); // For data classification
         this.orgData.metadata.apexClasses = await this.collectMetadata('ApexClass');
         this.orgData.metadata.visualforcePages = await this.collectMetadata('ApexPage');
         this.orgData.metadata.lightningComponents = await this.collectMetadata('LightningComponentBundle');
 
         // Collect comprehensive security-relevant query data
-        this.orgData.queryData.users = await this.collectQueryData("SELECT Id, Name, Profile.Name, UserPermissionsConnectedApp, IsActive, LastLoginDate, FailedLoginAttempts, UserType, Email FROM User");
+        this.orgData.queryData.users = await this.collectQueryData("SELECT Id, Name, Profile.Name, IsActive, LastLoginDate, FailedLoginAttempts, UserType, Email FROM User");
         this.orgData.queryData.profiles = await this.collectQueryData("SELECT Id, Name, PermissionsModifyAllData, PermissionsViewAllData, PermissionsViewAllUsers, PermissionsManageUsers, PermissionsViewSetup, PermissionsModifyMetadata FROM Profile");
         this.orgData.queryData.permissionSetAssignments = await this.collectQueryData("SELECT Id, Assignee.Name, PermissionSet.Name, PermissionSet.Type FROM PermissionSetAssignment");
         this.orgData.queryData.loginHistory = await this.collectQueryData("SELECT Id, UserId, LoginTime, LoginType, SourceIp, Status, Browser, Platform FROM LoginHistory ORDER BY LoginTime DESC LIMIT 2000");
-        this.orgData.queryData.objectPermissions = await this.collectQueryData("SELECT Parent.Name, SobjectType, PermissionsRead, PermissionsCreate, PermissionsEdit, PermissionsDelete, PermissionsViewAllRecords, PermissionsModifyAllRecords FROM ObjectPermissions WHERE Parent.IsOwnedByProfile = true OR Parent.IsOwnedByPermissionSet = true");
-        this.orgData.queryData.fieldPermissions = await this.collectQueryData("SELECT Parent.Name, SobjectType, Field, PermissionsRead, PermissionsEdit FROM FieldPermissions WHERE Parent.IsOwnedByProfile = true OR Parent.IsOwnedByPermissionSet = true");
+        this.orgData.queryData.objectPermissions = await this.collectQueryData("SELECT ParentId, Parent.Name, SobjectType, PermissionsRead, PermissionsCreate, PermissionsEdit, PermissionsDelete, PermissionsViewAllRecords, PermissionsModifyAllRecords FROM ObjectPermissions");
+        this.orgData.queryData.fieldPermissions = await this.collectQueryData("SELECT ParentId, Parent.Name, SobjectType, Field, PermissionsRead, PermissionsEdit FROM FieldPermissions");
         
         // Enhanced ConnectedApp security queries to detect potential data theft risks
-        this.orgData.queryData.connectedApps = await this.collectQueryData("SELECT Id, Name, CreatedBy.Name, CreatedDate, LastModifiedBy.Name, LastModifiedDate, OptionsAllowAdminApprovedUsersOnly, OptionsHasSessionLevelPolicy, OptionsRefreshTokenValidityMetric, RefreshTokenValidityPeriod FROM ConnectedApp");
-        this.orgData.queryData.connectedAppOAuthTokens = await this.collectQueryData("SELECT Id, AppName, UserId, User.Name, User.Profile.Name, CreatedDate, LastUsedDate, UseCount FROM ConnectedApplication WHERE LastUsedDate != null ORDER BY LastUsedDate DESC LIMIT 1000");
+        this.orgData.queryData.connectedApps = await this.collectQueryData("SELECT Id, Name, CreatedBy.Name, CreatedDate, LastModifiedBy.Name, LastModifiedDate FROM ConnectedApp");
+        this.orgData.queryData.connectedAppOAuthTokens = await this.collectQueryData("SELECT Id, AppName, UserId, User.Name, User.Profile.Name, CreatedDate, LastUsedDate, UseCount FROM OauthToken WHERE LastUsedDate != null ORDER BY LastUsedDate DESC LIMIT 1000");
         this.orgData.queryData.oauthTokens = await this.collectQueryData("SELECT Id, AppName, UserId, User.Name, CreatedDate, LastUsedDate, UseCount FROM OauthToken ORDER BY LastUsedDate DESC LIMIT 500");
         
         // Additional comprehensive security data collection
         this.orgData.queryData.setupAuditTrail = await this.collectQueryData("SELECT Id, Action, Section, CreatedBy.Name, CreatedDate, Display FROM SetupAuditTrail ORDER BY CreatedDate DESC LIMIT 1000");
-        this.orgData.queryData.apiUsage = await this.collectQueryData("SELECT Id, RequestIdentifier, Url, Method, Status, RunTime, CreatedDate FROM ApiEvent ORDER BY CreatedDate DESC LIMIT 500");
-        this.orgData.queryData.dataExport = await this.collectQueryData("SELECT Id, ExportedBy.Name, ExportedDate, Status, Type FROM DataExport ORDER BY ExportedDate DESC LIMIT 100");
+        this.orgData.queryData.apiUsage = await this.collectQueryData("SELECT Id, RequestIdentifier, Url, Method, Status, RunTime, CreatedDate FROM EventLogFile WHERE EventType = 'API' AND CreatedDate = TODAY LIMIT 500");
+        this.orgData.queryData.dataExport = await this.collectQueryData("SELECT Id, ExportedBy.Name, ExportedDate, Status FROM BulkApiResultEventStore ORDER BY ExportedDate DESC LIMIT 100");
         this.orgData.queryData.emailMessages = await this.collectQueryData("SELECT Id, Subject, FromAddress, ToAddress, CreatedDate, Status FROM EmailMessage WHERE CreatedDate = LAST_N_DAYS:30 LIMIT 500");
-        this.orgData.queryData.contentDocuments = await this.collectQueryData("SELECT Id, Title, FileType, ContentSize, CreatedBy.Name, CreatedDate, IsPublic FROM ContentDocument WHERE CreatedDate = LAST_N_DAYS:30 ORDER BY ContentSize DESC LIMIT 200");
+        this.orgData.queryData.contentDocuments = await this.collectQueryData("SELECT Id, Title, FileType, ContentSize, CreatedBy.Name, CreatedDate FROM ContentDocument WHERE CreatedDate = LAST_N_DAYS:30 ORDER BY ContentSize DESC LIMIT 200");
         this.orgData.queryData.networkMembers = await this.collectQueryData("SELECT Id, MemberId, Member.Name, NetworkId, Network.Name FROM NetworkMember LIMIT 500");
-        this.orgData.queryData.domainSites = await this.collectQueryData("SELECT Id, Domain, Subdomain, PathPrefix, SiteType FROM Domain LIMIT 100");
+        this.orgData.queryData.domainSites = await this.collectQueryData("SELECT Id, Domain, Subdomain, PathPrefix FROM Site LIMIT 100");
         this.orgData.queryData.cspTrustedSites = await this.collectQueryData("SELECT Id, EndpointUrl, Description, IsActive FROM CspTrustedSite");
         this.orgData.queryData.remoteSiteSettings = await this.collectQueryData("SELECT Id, SiteName, EndpointUrl, Description, IsActive FROM RemoteSiteSetting");
         this.orgData.queryData.namedCredentials = await this.collectQueryData("SELECT Id, DeveloperName, Endpoint, PrincipalType FROM NamedCredential");
         this.orgData.queryData.externalDataSources = await this.collectQueryData("SELECT Id, DeveloperName, Endpoint, Protocol, Type FROM ExternalDataSource");
         this.orgData.queryData.authProviders = await this.collectQueryData("SELECT Id, DeveloperName, ProviderType, AuthorizeUrl, TokenUrl FROM AuthProvider");
-        this.orgData.queryData.singleSignOnSettings = await this.collectQueryData("SELECT Id, Name, Issuer, AttributeFormat, IsActive FROM SamlSsoConfig");
+        this.orgData.queryData.singleSignOnSettings = await this.collectQueryData("SELECT Id, Name, Issuer, IsActive FROM SamlSsoConfig");
         this.orgData.queryData.myDomainSettings = await this.collectQueryData("SELECT Id, Domain, DomainType FROM Domain WHERE DomainType = 'MyDomain'");
         this.orgData.queryData.certificateAndKeyManagement = await this.collectQueryData("SELECT Id, DeveloperName, KeySize, ExpirationDate FROM Certificate");
     }
@@ -374,16 +370,16 @@ class SalesforceWellArchitectedAudit {
         if (securityRisks.length > 0) {
             details.push(`🛡️ SECURITY RECOMMENDATIONS:`);
             if (securityRisks.includes('Connected Apps without admin approval detected')) {
-                details.push(`  • Enable "Admin approved users are pre-authorized" for all Connected Apps`);
-                details.push(`  • Review and audit all Connected App permissions and scopes`);
+                details.push(`  1. Enable "Admin approved users are pre-authorized" for all Connected Apps`);
+                details.push(`  2. Review and audit all Connected App permissions and scopes`);
             }
             if (securityRisks.includes('High-usage OAuth tokens detected')) {
-                details.push(`  • Monitor OAuth token usage patterns for anomalies`);
-                details.push(`  • Implement token rotation policies`);
+                details.push(`  1. Monitor OAuth token usage patterns for anomalies`);
+                details.push(`  2. Implement token rotation policies`);
             }
             if (securityRisks.includes('Long-lived refresh tokens detected')) {
-                details.push(`  • Reduce refresh token validity periods to maximum 30 days`);
-                details.push(`  • Implement regular token auditing and cleanup`);
+                details.push(`  1. Reduce refresh token validity periods to maximum 30 days`);
+                details.push(`  2. Implement regular token auditing and cleanup`);
             }
         }
 
@@ -488,16 +484,16 @@ class SalesforceWellArchitectedAudit {
         if (securityRisks.length > 0) {
             details.push(`🛡️ SECURITY RECOMMENDATIONS:`);
             if (securityRisks.includes('Overly permissive object access detected')) {
-                details.push(`  • Review and restrict "View All" and "Modify All" permissions`);
-                details.push(`  • Implement role-based access with sharing rules instead`);
+                details.push(`  1. Review and restrict "View All" and "Modify All" permissions`);
+                details.push(`  2. Implement role-based access with sharing rules instead`);
             }
             if (securityRisks.includes('Sensitive fields with broad access')) {
-                details.push(`  • Implement field-level security for sensitive data fields`);
-                details.push(`  • Use permission sets for granular field access control`);
+                details.push(`  1. Implement field-level security for sensitive data fields`);
+                details.push(`  2. Use permission sets for granular field access control`);
             }
             if (securityRisks.includes('Excessive metadata access permissions')) {
-                details.push(`  • Limit setup and metadata permissions to system administrators`);
-                details.push(`  • Create separate admin profiles for different responsibilities`);
+                details.push(`  1. Limit setup and metadata permissions to system administrators`);
+                details.push(`  2. Create separate admin profiles for different responsibilities`);
             }
         }
 
