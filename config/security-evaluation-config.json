@@ -1,0 +1,45 @@
+{
+  "securityCategories": {
+    "profilesAndPermissionSets": {
+      "name": "Profiles and Permission Sets",
+      "weight": 0.15,
+      "description": "Evaluates security configurations related to user profiles, permission sets, and connected app access."
+    },
+    "objectAndFieldLevelSecurity": {
+      "name": "Object and Field Level Security (OLS & FLS)",
+      "weight": 0.15,
+      "description": "Assesses data access restrictions at the object and field level."
+    },
+    "sharingAndVisibilitySettings": {
+      "name": "Sharing and Visibility Settings",
+      "weight": 0.15,
+      "description": "Examines organization-wide defaults, sharing rules, and role hierarchies."
+    },
+    "customCodeAndMetadataAPI": {
+      "name": "Custom Code and Metadata API",
+      "weight": 0.15,
+      "description": "Reviews Apex, Visualforce, Lightning components, and Metadata API usage for security vulnerabilities."
+    },
+    "publicAccessSettings": {
+      "name": "Public Access Settings",
+      "weight": 0.10,
+      "description": "Checks guest user profiles, public sites, and unauthenticated access."
+    },
+    "dataClassification": {
+      "name": "Data Classification",
+      "weight": 0.15,
+      "description": "Evaluates the classification of sensitive data and its protection mechanisms."
+    },
+    "auditTrailsAndMonitoring": {
+      "name": "Audit Trails and Monitoring",
+      "weight": 0.15,
+      "description": "Assesses logging, event monitoring, and audit trail configurations."
+    }
+  },
+  "scoringThresholds": {
+    "critical": 0.20,
+    "high": 0.40,
+    "medium": 0.60,
+    "low": 0.80
+  }
+}

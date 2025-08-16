@@ -1,0 +1,70 @@
+{
+  "overallScore": 8.8,
+  "timestamp": "2025-08-15T23:56:09.783Z",
+  "organization": "demo-org",
+  "categoryScores": {
+    "profilesAndPermissionSets": {
+      "score": 3,
+      "details": [
+        "🚨 SECURITY RISK: Found 1 profiles with ModifyAllData or ViewAllData permissions: System Administrator",
+        "📱 Found 2 Connected Apps in organization",
+        "🚨 CRITICAL RISK: 1 Connected Apps allow user self-authorization without admin approval:",
+        "  - Suspicious Data Extractor (Created: 2025-07-31T23:56:09.779Z, By: External User)",
+        "⚠️ WARNING: 1 Connected Apps lack session-level security policies",
+        "📅 1 Connected Apps created in last 30 days - review for legitimacy:",
+        "  - Suspicious Data Extractor (Created: 2025-07-31T23:56:09.779Z, By: External User)",
+        "🔑 Found 2 active OAuth tokens",
+        "⚠️ 1 OAuth tokens with high usage (>1000 uses) - monitor for data exfiltration:",
+        "  - Suspicious Data Extractor: 1500 uses by John Doe",
+        "📊 2 OAuth tokens used in last 7 days - verify legitimate business use",
+        "🛡️ SECURITY RECOMMENDATIONS:",
+        "  • Enable \"Admin approved users are pre-authorized\" for all Connected Apps",
+        "  • Review and audit all Connected App permissions and scopes",
+        "  • Monitor OAuth token usage patterns for anomalies",
+        "  • Implement token rotation policies"
+      ]
+    },
+    "objectAndFieldLevelSecurity": {
+      "score": 9,
+      "details": [
+        "Found 1 overly permissive object permissions."
+      ]
+    },
+    "sharingAndVisibilitySettings": {
+      "score": 10,
+      "details": [
+        "Sharing and Visibility Settings evaluation placeholder."
+      ]
+    },
+    "customCodeAndMetadataAPI": {
+      "score": 10,
+      "details": [
+        "Custom Code and Metadata API evaluation placeholder."
+      ]
+    },
+    "publicAccessSettings": {
+      "score": 10,
+      "details": [
+        "Public Access Settings evaluation placeholder."
+      ]
+    },
+    "dataClassification": {
+      "score": 10,
+      "details": [
+        "Data Classification evaluation placeholder."
+      ]
+    },
+    "auditTrailsAndMonitoring": {
+      "score": 10,
+      "details": [
+        "Audit Trails and Monitoring evaluation placeholder."
+      ]
+    }
+  },
+  "recommendationCounts": {
+    "critical": 0,
+    "high": 1,
+    "medium": 0,
+    "low": 6
+  }
+}

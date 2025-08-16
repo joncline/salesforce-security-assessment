@@ -1,0 +1,10 @@
+# Reports Directory
+
+This directory contains generated security assessment reports:
+
+- `security-audit-report.md` - Detailed markdown report
+- `security-audit-report.html` - Visual HTML report with charts
+- `security-action-plan.json` - Prioritized security recommendations
+- `security-compliance-summary.json` - Compliance status summary
+
+Reports are generated automatically when running the security assessment.
