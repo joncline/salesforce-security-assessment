@@ -5,6 +5,7 @@ A comprehensive security evaluation tool for Salesforce organizations, built wit
 ## Table of Contents
 
 - [Overview](#overview)
+- [Getting Started with Cline + VS Code](#getting-started-with-cline--vs-code)
 - [Features](#features)
 - [Security Categories](#security-categories)
 - [Installation](#installation)
@@ -30,6 +31,162 @@ A comprehensive security evaluation tool for Salesforce organizations, built wit
 ## Overview
 
 This tool transforms the original Salesforce Well-Architected Framework audit into a focused **Salesforce Security Assessment** that evaluates your organization's security posture across key areas including profiles, permissions, data access, custom code, and monitoring.
+
+## Getting Started with Cline + VS Code
+
+**New to Cline and VS Code?** This section will guide you through downloading the source code and using Cline to help you understand the project and install prerequisites.
+
+### What is Cline?
+
+[Cline](https://github.com/cline/cline) is an AI-powered coding assistant that runs in VS Code. It can help you:
+- 🔍 **Understand code** by explaining what files do and how they work together
+- 🛠️ **Install prerequisites** by running commands and setting up your environment
+- 🚀 **Run the security assessment** with guided assistance
+- 📝 **Customize the tool** for your specific needs
+
+### Step 1: Install Prerequisites
+
+Before downloading the source code, you'll need these tools installed:
+
+#### Install VS Code
+1. Download VS Code from [code.visualstudio.com](https://code.visualstudio.com/)
+2. Install it on your system (Windows, macOS, or Linux)
+
+#### Install Cline Extension
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X or Cmd+Shift+X)
+3. Search for "Cline" 
+4. Click "Install" on the Cline extension
+5. Follow the setup instructions to connect your AI provider (Claude, OpenAI, etc.)
+
+#### Install Git (if not already installed)
+- **Windows**: Download from [git-scm.com](https://git-scm.com/) (includes Git Bash)
+- **macOS**: Install via Homebrew `brew install git` or download from git-scm.com
+- **Linux**: Install via package manager (e.g., `sudo apt install git`)
+
+### Step 2: Download the Source Code
+
+#### Option A: Using Git (Recommended)
+```bash
+# Clone the repository
+git clone https://github.com/joncline/salesforce-security-assessment.git
+
+# Navigate to the project directory
+cd salesforce-security-assessment
+```
+
+#### Option B: Download ZIP
+1. Go to [https://github.com/joncline/salesforce-security-assessment](https://github.com/joncline/salesforce-security-assessment)
+2. Click the green "Code" button
+3. Select "Download ZIP"
+4. Extract the ZIP file to your desired location
+
+### Step 3: Open Project in VS Code
+
+1. Open VS Code
+2. File → Open Folder (or Ctrl+K, Ctrl+O)
+3. Select the `salesforce-security-assessment` folder
+4. VS Code will open the project with all files visible in the sidebar
+
+### Step 4: Start Cline and Get Help
+
+1. **Open Cline**: Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac) and type "Cline: Open"
+2. **Ask Cline to help you get started**. Here are some example prompts:
+
+#### 🔍 Understanding the Project
+```
+Hi Cline! I'm new to this Salesforce Security Assessment tool. Can you:
+1. Explain what this project does
+2. Show me the main files I should know about
+3. Help me understand how the security assessment works
+```
+
+#### 🛠️ Installing Prerequisites
+```
+I need help setting up this project. Can you:
+1. Check what prerequisites I'm missing
+2. Help me install Node.js and Salesforce CLI
+3. Guide me through the setup process step by step
+```
+
+#### 🚀 Running Your First Assessment
+```
+I want to run a security assessment on my Salesforce org. Can you:
+1. Help me authenticate with Salesforce CLI
+2. Show me how to run the quick assessment
+3. Explain what the results mean
+```
+
+#### 📝 Customizing the Tool
+```
+I want to customize this tool for my organization. Can you:
+1. Show me how to modify the security categories
+2. Help me adjust the scoring weights
+3. Explain how to add new security checks
+```
+
+### Step 5: Let Cline Guide Your Setup
+
+Once you've asked Cline for help, it will:
+
+1. **Analyze your system** and check what's already installed
+2. **Install missing prerequisites** by running the necessary commands
+3. **Explain each step** so you understand what's happening
+4. **Test the installation** to make sure everything works
+5. **Run a demo** to show you how the tool works
+
+### Common Cline Commands for This Project
+
+Here are some helpful prompts you can use with Cline:
+
+#### Project Exploration
+- `"Show me the project structure and explain what each folder does"`
+- `"What are the main configuration files and how do I modify them?"`
+- `"Explain how the security scoring algorithm works"`
+
+#### Setup and Installation
+- `"Check if I have all the prerequisites installed"`
+- `"Help me install the Salesforce CLI and authenticate with my org"`
+- `"Set up the project so I can run my first security assessment"`
+
+#### Running Assessments
+- `"Run a demo security assessment with mock data"`
+- `"Help me connect to my Salesforce sandbox and run an assessment"`
+- `"Explain the security assessment results and what I should do next"`
+
+#### Troubleshooting
+- `"I'm getting an error when trying to run the assessment, can you help?"`
+- `"The Salesforce CLI authentication isn't working, what should I do?"`
+- `"How do I fix permission errors when running the scripts?"`
+
+### Benefits of Using Cline
+
+✅ **Interactive Learning**: Cline explains code and concepts as you go  
+✅ **Automated Setup**: Cline can run installation commands for you  
+✅ **Error Resolution**: Cline helps debug issues and suggests fixes  
+✅ **Customization Help**: Cline can modify code based on your requirements  
+✅ **Best Practices**: Cline suggests security best practices and improvements  
+
+### Next Steps
+
+After Cline helps you set up the project:
+
+1. **Run the demo** to see how the tool works with sample data
+2. **Connect to your Salesforce org** and run a real assessment
+3. **Review the generated reports** and understand your security posture
+4. **Customize the tool** based on your organization's specific needs
+5. **Schedule regular assessments** to monitor your security over time
+
+### Getting Help
+
+If you run into issues:
+
+1. **Ask Cline first** - it can solve most common problems
+2. **Check the [Platform Compatibility](#platform-compatibility) section** for OS-specific guidance
+3. **Review the [Requirements](#requirements) section** to ensure all prerequisites are met
+4. **Look at the [Support](#support) section** for additional resources
+
+**Pro Tip**: Cline learns from your questions, so don't hesitate to ask for clarification or more detailed explanations!
 
 ## Features
 
